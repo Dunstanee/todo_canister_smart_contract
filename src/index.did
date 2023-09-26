@@ -1,0 +1,18 @@
+type Message = record {
+  id : text;
+  title : text;
+  createdAt : nat64;
+  completed : bool;
+  description : text;
+  updatedAt : opt nat64;
+};
+type MessagePayload = record { title : text; description : text };
+type _AzleResult = variant { Ok : Message; Err : text };
+type _AzleResult_1 = variant { Ok : vec Message; Err : text };
+service : () -> {
+  addMessage : (MessagePayload) -> (_AzleResult);
+  deleteMessage : (text) -> (_AzleResult);
+  getMessage : (text) -> (_AzleResult) query;
+  getMessages : () -> (_AzleResult_1) query;
+  updateMessage : (text, MessagePayload) -> (_AzleResult);
+}
